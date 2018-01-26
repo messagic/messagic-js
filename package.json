@@ -1,0 +1,23 @@
+{
+  "name": "messagic",
+  "version": "0.0.1",
+  "description": "JavaScript implementation of Messagic, a high level API for asynchronous message passing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/messagic/messagic-js.git"
+  },
+  "keywords": [
+    "message",
+    "messaging"
+  ],
+  "author": "Messagic",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/messagic/messagic-js/issues"
+  },
+  "homepage": "https://github.com/messagic/messagic-js#readme"
+}
