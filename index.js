@@ -1,6 +1,5 @@
 module.exports = class StreamsMessageChannel {
     constructor(inputStream, outputStream) {
-        console.log('yupi')
     }
 
     addListener(eventType, listener) {
@@ -24,4 +23,3 @@ module.exports = class StreamsMessageChannel {
     }
 }
 
-console.log('Hello world')
