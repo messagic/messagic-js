@@ -52,11 +52,11 @@ class Lines {
 }
 
 describe('FakeWritable', () => {
-    describe('nextLine', () => {
+    describe('lines()', () => {
         it('should read line written as string seperated by \n', (done) => {
             const writable = new FakeWritable()
             writable.write('hello\n', (error) => {
-                assert.equal(error, null); // WTF? There is no assert.isNull?
+                assert.strictEqual(error, null); 
                 assert.deepEqual(writable.lines(), ['hello\n'])
                 done()
             })
@@ -64,9 +64,9 @@ describe('FakeWritable', () => {
         it('should read line written using two write calls', (done) => {
             const writable = new FakeWritable()
             writable.write('hel', (error) => {
-                assert.equal(error, null); // WTF? There is no assert.isNull?
+                assert.strictEqual(error, null); 
                 writable.write('lo\n', (error) => {
-                    assert.equal(error, null); // WTF? There is no assert.isNull?
+                    assert.strictEqual(error, null); 
                     assert.deepEqual(writable.lines(), ['hello\n'])
                     done()
                 })
