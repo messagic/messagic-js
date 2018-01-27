@@ -1,5 +1,6 @@
 module.exports = class StreamsMessageChannel {
-    constructor(inputStream, outputStream) {
+    constructor(readableStream, writableStream) {
+        readableStream.setEncoding('utf-8')
     }
 
     addListener(eventType, listener) {
