@@ -1,6 +1,6 @@
-const { Readable, Writable } = require('stream');
-const assert = require('assert');
-const StreamsMessageChannel = require('../index.js');
+const { Readable, Writable } = require('stream')
+const assert = require('assert')
+const StreamsMessageChannel = require('../index.js')
 const FakeReadable = require('./FakeReadable.js')
 
 describe('StreamsMessageChannel', () => {

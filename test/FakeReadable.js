@@ -1,23 +1,21 @@
-const { Readable, Writable } = require('stream');
-const assert = require('assert');
+const { Readable } = require('stream')
+const assert = require('assert')
 
 class FakeReadable extends Readable {
     
     constructor() {
-        super({
-            highWaterMark: 1
-        });
-        this.strings = [];
-        this.readPending = false; 
+        super({})
+        this.strings = []
+        this.readPending = false 
     }
 
     _read(size) {
         if (this.strings.length > 0) {
             const str = this.strings.shift()
-            this.push(str);
-            this.readPending = false;
+            this.push(str)
+            this.readPending = false
         } else {
-            this.readPending = true;
+            this.readPending = true
         }
     }
 
@@ -25,17 +23,17 @@ class FakeReadable extends Readable {
         if (this.readPending) {
             this.push(string)
         } else {
-            this.strings.push(string);
+            this.strings.push(string)
         }
     }
 
     end() {
-        this.strings.push(null);
+        this.strings.push(null)
     }
 
     close() {
-        this.end();
-        this.emit('close');
+        this.end()
+        this.emit('close')
     }
    
 }
