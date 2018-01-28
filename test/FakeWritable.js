@@ -74,3 +74,6 @@ describe('FakeWritable', () => {
         })
     })
 })
+
+
+module.exports = FakeWritable
