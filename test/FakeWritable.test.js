@@ -4,7 +4,7 @@ const assert = require('chai').assert;
 describe('FakeWritable', () => {
     describe('lines()', () => {
         it('should read line written as string seperated by \n', (done) => {
-            const writable = new FakeWritable()
+            const writable = new FakeWritable();
             writable.write('hello\n', (error) => {
                 assert.isUndefined(error);
                 assert.deepEqual(writable.lines(), ['hello\n']);

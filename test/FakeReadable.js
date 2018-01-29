@@ -3,7 +3,7 @@ const { Readable } = require('stream');
 class FakeReadable extends Readable {
     
     constructor() {
-        super({});
+        super();
         this.stringsQueue = [];
         this.readPending = false;
     }
