@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = class StreamsMessageChannel {
     constructor(readableStream, writableStream) {
         readableStream.setEncoding('utf-8')
