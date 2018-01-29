@@ -24,7 +24,7 @@ describe('StreamsMessageChannel', () => {
             channel.sendText('textMessage');
             expect(writable.lines()).to.deep.equal(['textMessage\n'])
         });
-        it("should send binary message to writable stream", () => {
+        it('should send binary message to writable stream', () => {
             channel.start();
             const buffer = new Int8Array([1,2,3]).buffer
             channel.sendBinary(buffer);

@@ -1,11 +1,12 @@
 const FakeReadable = require('./FakeReadable');
-const assert = require('chai').assert;
+const expect = require('chai').expect;
+const { Buffer } = require('buffer');
 
 describe('FakeReadable', () => {
     it('synchronous write should emit data event', (done) => {
         const stream = new FakeReadable();
         const listener = (data) => {
-            assert.equal(data, 'str');
+            expect(data).to.deep.equal(Buffer.from('str'));
             done();
         }
         stream.addListener('data', listener);
@@ -14,7 +15,7 @@ describe('FakeReadable', () => {
     it('asynchronous write should emit data event', (done) => {
         const stream = new FakeReadable();
         const listener = (data) => {
-            assert.equal(data, 'str');
+            expect(data).to.deep.equal(Buffer.from('str'));
             done();
         }
         stream.addListener('data', listener);
@@ -26,7 +27,7 @@ describe('FakeReadable', () => {
         const stream = new FakeReadable();
         let times = 0;
         const listener = (data) => {
-            assert.equal(data, 'str');
+            expect(data).to.deep.equal(Buffer.from('str'));
             times++;
             if (times == 2) {
                 done();
