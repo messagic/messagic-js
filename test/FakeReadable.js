@@ -4,13 +4,13 @@ class FakeReadable extends Readable {
     
     constructor() {
         super({});
-        this.strings = [];
+        this.stringsQueue = [];
         this.readPending = false;
     }
 
     _read(size) {
-        if (this.strings.length > 0) {
-            const str = this.strings.shift();
+        if (this.stringsQueue.length > 0) {
+            const str = this.stringsQueue.shift();
             this.push(str);
             this.readPending = false;
         } else {
@@ -22,12 +22,12 @@ class FakeReadable extends Readable {
         if (this.readPending) {
             this.push(string);
         } else {
-            this.strings.push(string);
+            this.stringsQueue.push(string);
         }
     }
 
     end() {
-        this.strings.push(null);
+        this.stringsQueue.push(null);
     }
 
     close() {

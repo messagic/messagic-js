@@ -31,21 +31,21 @@ class Lines {
     }
 
     _append(fragment) {
-        if (this._lines.length == 0 || this._lastLineEndsWithEOL()) {
-            if (fragment.length > 0) {
+        if (fragment.length > 0) {
+            if (this._lines.length == 0 || this._lastLine().endsWith('\n')) {
                 this._lines.push(fragment);
+            } else {
+                this._lines[this._lines.length - 1] += fragment;
             }
-        } else {
-            this._lines[this._lines.length - 1] += fragment;
         }
     }
 
-    _lastLineEndsWithEOL() {
-        return this._lines[this._lines.length - 1].endsWith('\n');
+    _lastLine() {
+        return this._lines[this._lines.length - 1];
     }
 
     lines() {
-        return this._lines.slice(0);
+        return [...this._lines];
     }
 
 }
