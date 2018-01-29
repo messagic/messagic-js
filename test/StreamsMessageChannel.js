@@ -1,6 +1,6 @@
 const { Readable, Writable } = require('stream');
 const expect = require('chai').expect;
-const StreamsMessageChannel = require('../index.js');
+const StreamsMessageChannel = require('../lib/StreamsMessageChannel');
 const FakeReadable = require('./FakeReadable');
 const FakeWritable = require('./FakeWritable');
 
