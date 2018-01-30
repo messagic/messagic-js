@@ -22,13 +22,13 @@ describe('StreamsMessageChannel', () => {
         it('should send text message to writable stream', () => {
             channel.start();
             channel.sendText('textMessage');
-            expect(writable.lines()).to.deep.equal(['textMessage\n'])
+            expect(writable.lines()).to.deep.equal(['textMessage\n']);
         });
         it('should send binary message to writable stream', () => {
             channel.start();
             const buffer = new Int8Array([1,2,3]).buffer
             channel.sendBinary(buffer);
-            expect(writable.lines()).to.deep.equal(['$AQID\n'])
+            expect(writable.lines()).to.deep.equal(['$AQID\n']);
         });
     });
     
@@ -39,7 +39,7 @@ describe('StreamsMessageChannel', () => {
                 done();
             });
             channel.start();
-            readable.write('textMessage\n')
+            readable.write('textMessage\n');
         });
     });
 });
