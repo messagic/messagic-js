@@ -7,7 +7,7 @@ const FakeWritable = require('./FakeWritable');
 describe('StreamsMessageChannel', () => {
     
     let readable, writable, channel;
-    
+
     beforeEach(() => {
         readable = new FakeReadable();
         writable = new FakeWritable();

@@ -24,10 +24,10 @@ class Lines {
     }
 
     append(string) {
-        let fragments = string.split(/(\n)/g);
-        fragments.forEach(fragment => {
-            this._append(fragment);
-        });
+        const fragments = string.split(/(\n)/g);
+        for (const fragment of fragments) {
+            this._append(fragment);            
+        }
     }
 
     _append(fragment) {

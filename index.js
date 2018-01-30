@@ -1,0 +1,1 @@
+module.exports.StreamsMessageChannel = require('./lib/StreamsMessageChannel');
