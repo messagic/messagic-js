@@ -4,30 +4,30 @@ class FakeReadable extends Readable {
     
     constructor() {
         super();
-        this.stringsQueue = [];
-        this.readPending = false;
+        this._stringsQueue = [];
+        this._readPending = false;
     }
 
     _read(size) {
-        if (this.stringsQueue.length > 0) {
-            const str = this.stringsQueue.shift();
+        if (this._stringsQueue.length > 0) {
+            const str = this._stringsQueue.shift();
             this.push(str);
-            this.readPending = false;
+            this._readPending = false;
         } else {
-            this.readPending = true;
+            this._readPending = true;
         }
     }
 
     write(string) {
-        if (this.readPending) {
+        if (this._readPending) {
             this.push(string);
         } else {
-            this.stringsQueue.push(string);
+            this._stringsQueue.push(string);
         }
     }
 
     end() {
-        this.stringsQueue.push(null);
+        this._stringsQueue.push(null);
     }
 
     close() {
@@ -37,4 +37,4 @@ class FakeReadable extends Readable {
    
 }
 
-module.exports = FakeReadable;
+module.exports = FakeReadable
