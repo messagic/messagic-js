@@ -4,7 +4,7 @@ class FakeWritable extends Writable {
 
     constructor() {
         super({ decodeStrings: false });
-        this._lines = new Lines();
+        this._lines = Lines();
     }
 
     _write(chunk, encoding, callback) {
@@ -16,38 +16,45 @@ class FakeWritable extends Writable {
         return this._lines.lines();
     }
 
-}
-
-class Lines {
-    constructor() {
-        this._lines = [];
+    linesJoined() {
+        return this._lines.lines().join('');
     }
 
-    append(string) {
+}
+
+function Lines() {
+    
+    const _lines = [];
+    
+    function append(string) {
         const fragments = string.split(/(\n)/g);
         for (const fragment of fragments) {
-            this._append(fragment);            
+            _append(fragment);            
         }
     }
 
-    _append(fragment) {
+    function _append(fragment) {
         if (fragment.length > 0) {
-            if (this._lines.length == 0 || this._lastLine().endsWith('\n')) {
-                this._lines.push(fragment);
+            if (_lines.length == 0 || _lastLine().endsWith('\n')) {
+                _lines.push(fragment);
             } else {
-                this._lines[this._lines.length - 1] += fragment;
+                _lines[_lines.length - 1] += fragment;
             }
         }
     }
 
-    _lastLine() {
-        return this._lines[this._lines.length - 1];
+    function _lastLine() {
+        return _lines[_lines.length - 1];
     }
 
-    lines() {
-        return [...this._lines];
+    function lines() {
+        return [..._lines];
     }
 
+    return {
+        append: append,
+        lines: lines
+    }
 }
 
 module.exports = FakeWritable;
