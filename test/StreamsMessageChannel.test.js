@@ -79,14 +79,41 @@ describe('StreamsMessageChannel', () => {
         })
     });
 
-    describe.skip('receiving', () => {
-        it('should read encoded text message from readable stream and notify listener', (done) => {
-            channel.addListener('text', (text) => {
-                expect(text).to.be.equal('textMessage');
-                done();
+    describe('receiving', () => {
+        describe('receiving one-line text messages', () => {
+            const where = [
+                { encodedMessage: 'textMessage\n', expectedMessage: 'textMessage' },
+                { encodedMessage: '#textMessage\n', expectedMessage: 'textMessage' },
+                { encodedMessage: '\n', expectedMessage: '' },
+                { encodedMessage: '#\n', expectedMessage: '' },
+                { encodedMessage: 'Aą\n', expectedMessage: 'Aą' },
+                { encodedMessage: 'ą\n', expectedMessage: 'ą' }, // 2 bytes in UTF-8
+                { encodedMessage: 'ಎ\n', expectedMessage: 'ಎ' }, // 3 bytes
+                { encodedMessage: '𐊀\n', expectedMessage: '𐊀' } // 4 bytes
+            ];
+            where.forEach(e => {
+                const encodedMessageFormatted = e.encodedMessage.replace(/\n/, '\\n');
+                it(`should read encoded text message "${encodedMessageFormatted}" from readable stream and notify listener with "${e.expectedMessage}"`, (done) => {
+                    channel.addListener('text', (text) => {
+                        expect(text).to.be.equal(e.expectedMessage);
+                        done();
+                    });
+                    channel.start();
+                    readable.write(e.encodedMessage);
+                });
             });
-            channel.start();
-            readable.write('textMessage\n');
         });
+        describe('receive one-line fragmented text messages', () => {
+            it('should read fragmented encoded text message "textMessage\\n" and notifiy listener with "textMessage"', (done) => {
+                channel.addListener('text', (text) => {
+                    expect(text).to.be.equal('textMessage');
+                    done();
+                })
+                channel.start();
+                readable.write('text');
+                readable.write('Message');
+                readable.write('\n');
+            })
+        })
     });
 });
