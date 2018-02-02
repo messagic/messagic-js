@@ -103,7 +103,7 @@ describe('StreamsMessageChannel', () => {
                 });
             });
         });
-        describe('receive one-line fragmented text messages', () => {
+        describe('receiving one-line fragmented text messages', () => {
             it('should read fragmented encoded text message "textMessage\\n" and notifiy listener with "textMessage"', (done) => {
                 channel.addListener('text', (text) => {
                     expect(text).to.be.equal('textMessage');
@@ -113,7 +113,10 @@ describe('StreamsMessageChannel', () => {
                 readable.write('text');
                 readable.write('Message');
                 readable.write('\n');
-            })
-        })
+            });
+        });
+        describe('receiving multi-line text messages', () => {
+            
+        });
     });
 });
